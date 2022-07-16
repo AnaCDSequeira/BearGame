@@ -1,61 +1,42 @@
 public class Shop {
 
-    private final String[] shops = new String[8];
+    public static final int SIMPLE_BEAR = 0;
+    public static final int CRANKY_BEAR = 1;
+    public static final int DRUNK_BEAR = 2;
     private String name;
-    private int accumulator;
-    private int max = 0;
-    private int min = 0;
-    private final int SIMPLE_BEAR = 0;
-    private final int CRANCKY_BEAR = 1;
-    private final int DRUNK_BEAR = 2;
+    private int accumulator = 0;
 
-    public Shop() {
-        for (int i = 0; i < shops.length; i++) {
-            if (shops[i] != null) {
-                break;
-            }
-            shops[i] = "Shop " + i;
-            this.name = name;
-            this.accumulator = 0;
-            max += 10;
+    private int typeOfBear;
+
+    public Shop(String name, int typeOfBear) {
+        this.name = name;
+        this.typeOfBear = typeOfBear;
+        this.accumulator = 0;
+    }
+
+    public void createBear() {
+        accumulator++;
+
+        if (typeOfBear == SIMPLE_BEAR) {
+            SimpleBear bear = new SimpleBear();
             return;
         }
-        System.out.println("The maximum number of shops was reached.");
+
+        if (typeOfBear == CRANKY_BEAR) {
+            CrankyBear bear = new CrankyBear();
+            return;
+        }
+
+        if (typeOfBear == DRUNK_BEAR) {
+            DrunkBear bear = new DrunkBear();
+        }
     }
 
-    public void bearGenerator() {
-        pickShop();
-        typeOfBear();
-        //URSO
+    public int getAccumulator() {
+        return accumulator;
     }
 
-    public int typeOfBear() {
-        if (randomNumber() % 2 == 0) {
-            return SIMPLE_BEAR;
-        }
-        if (randomNumber() % 5 == 0) {
-            return CRANCKY_BEAR;
-        }
-        return DRUNK_BEAR;
-    }
-
-    private int randomNumber() {
-        return ((int) (Math.random() * (max - min + 1) - min));
-    }
-
-
-    private int pickShop() {
-        if (shops[0] == null) {
-            System.out.println("There is no shop here. Go find one!");
-            return -1;
-        }
-        int temp = 10;
-        for (int i = 0; i < shops.length; i++) {
-            if ((randomNumber()) < temp) {
-                return i;
-            }
-            temp += 10;
-        }
-       return -1;
+    public String getName() {
+        return name;
     }
 }
